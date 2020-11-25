@@ -4,6 +4,7 @@ const colorDivs = document.querySelectorAll(".color");
 const generateButton = document.querySelector(".generate");
 const sliders = document.querySelectorAll('input[type="range"]');
 const currentHexes = document.querySelectorAll(".color h2");
+const popUp = document.querySelector(".copy-container");
 
 let initialColors;
 
@@ -18,8 +19,19 @@ colorDivs.forEach((div, index) => {
   });
 });
 
-// Functions
+currentHexes.forEach(hex => {
+  hex.addEventListener('click', () => {
+    copyToClipboard(hex);
+  })
+})
 
+popUp.addEventListener('transitionend',  () => {
+  const popUpBox = popUp.children[0];
+  popUp.classList.remove('active');
+  popUpBox.classList.remove('active');
+})
+
+// Functions
 // Color Generator
 function generateHex() {
   const hexColor = chroma.random();
@@ -152,4 +164,20 @@ if(slider.name === 'brightness') {
   });
 }
 
+function copyToClipboard(hex) {
+  const el = document.createElement('textarea');
+  el.value = hex.innerText;
+  document.body.appendChild(el);
+
+  el.select();
+  document.execCommand('copy')
+
+  document.body.removeChild(el);
+
+  // Popup animation
+  const popUpBox = popUp.children[0];
+  popUp.classList.add('active');
+  popUpBox.classList.add('active');
+
+}
 randomColors();
