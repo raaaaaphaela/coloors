@@ -84,6 +84,7 @@ svg {
   color: white;
   font-weight: bold;
   cursor: pointer;
+  opacity: 0;
 }
 
 .panel {
