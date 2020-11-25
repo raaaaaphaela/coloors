@@ -14,6 +14,8 @@ const sliderContainers = document.querySelectorAll('.sliders');
 let initialColors;
 
 // Event listeners
+generateButton.addEventListener('click', randomColors);
+
 sliders.forEach((slider) => {
   slider.addEventListener("input", hslControls);
 });
